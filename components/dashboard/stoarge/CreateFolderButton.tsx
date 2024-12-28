@@ -31,7 +31,7 @@ export function CreateFolderButton() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <Folder className="mr-2 h-4 w-4" />
+          <Folder className="mr-2 size-4" />
           Create Folder
         </Button>
       </DialogTrigger>

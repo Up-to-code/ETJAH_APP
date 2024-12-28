@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-
+ 
 import { getCurrentUser } from "@/lib/session";
 import { constructMetadata } from "@/lib/utils";
 import { DeleteAccountSection } from "@/components/dashboard/delete-account";
@@ -7,7 +6,8 @@ import { DashboardHeader } from "@/components/dashboard/header";
 import { UserNameForm } from "@/components/forms/user-name-form";
 import { UserRoleForm } from "@/components/forms/user-role-form";
 import { fetchUser } from "@/actions/getUsersDatat";
-
+import { redirect } from "next/navigation";
+ 
 export const metadata = constructMetadata({
   title: "Settings – Next Template",
   description: "Configure your account and website settings.",
