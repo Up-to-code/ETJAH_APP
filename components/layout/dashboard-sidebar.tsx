@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NavItem, SidebarNavItem } from "@/types";
+import { NavItem,  } from "@/types";
 import { Menu, PanelLeftClose, PanelRightClose } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
@@ -22,6 +22,10 @@ import {
 import ProjectSwitcher from "@/components/dashboard/project-switcher";
 import { UpgradeCard } from "@/components/dashboard/upgrade-card";
 import { Icons } from "@/components/shared/icons";
+interface SidebarNavItem {
+  title: string;
+  items: NavItem[];
+}
 
 interface DashboardSidebarProps {
   links: SidebarNavItem[];
