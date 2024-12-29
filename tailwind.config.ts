@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
-
-const { fontFamily } = require("tailwindcss/defaultTheme");
+import { withUt } from "uploadthing/tw";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
   darkMode: ["class"],
@@ -74,7 +74,6 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        // Fade up and down
         "fade-up": {
           "0%": {
             opacity: "0",
@@ -101,7 +100,6 @@ const config = {
             transform: "translateY(0px)",
           },
         },
-        // Fade in and out
         "fade-in": {
           "0%": {
             opacity: "0",
@@ -128,12 +126,8 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-
-        // Fade up and down
         "fade-up": "fade-up 0.5s",
         "fade-down": "fade-down 0.5s",
-
-        // Fade in and out
         "fade-in": "fade-in 0.4s",
         "fade-out": "fade-out 0.4s",
       },
@@ -142,4 +136,4 @@ const config = {
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
 
-export default config;
+export default withUt(config);

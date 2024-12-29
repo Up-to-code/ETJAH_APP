@@ -71,7 +71,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
             )}
           >
             <div className="flex h-full max-h-screen flex-1 flex-col gap-2">
-              <div className="flex h-14 items-center p-4 lg:h-[60px]">
+              {/* <div className="flex h-14 items-center p-4 lg:h-[60px]">
                 {isSidebarExpanded ? <ProjectSwitcher /> : null}
 
                 <Button
@@ -93,7 +93,12 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                   )}
                   <span className="sr-only">Toggle Sidebar</span>
                 </Button>
-              </div>
+              </div> */}
+               <p className="text-center font-bold text-xl mt-8">
+                <span className="text-center font-bold text-xl">
+                   ETJAH 
+                </span>
+               </p>
 
               <nav className="flex flex-1 flex-col gap-8 px-4 pt-4">
                 {links.map((section) => (

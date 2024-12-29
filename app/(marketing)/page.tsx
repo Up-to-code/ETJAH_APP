@@ -6,7 +6,7 @@ export default function IndexPage() {
   return (
     <>
       <HeroLanding />
-      <PreviewLanding />
+      {/* <PreviewLanding /> */}
     </>
   );
 }

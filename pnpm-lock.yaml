@@ -116,6 +116,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^7.16.1
         version: 7.16.1(eslint@8.57.0)(typescript@5.5.3)
+      '@uploadthing/react':
+        specifier: ^7.1.3
+        version: 7.1.3(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(uploadthing@7.4.1(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.6))
       '@vercel/analytics':
         specifier: ^1.3.1
         version: 1.3.1(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
@@ -206,6 +209,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.6)
+      uploadthing:
+        specifier: ^7.4.1
+        version: 7.4.1(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.6)
       vaul:
         specifier: ^0.9.1
         version: 0.9.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -581,6 +587,11 @@ packages:
 
   '@effect-ts/system@0.57.5':
     resolution: {integrity: sha512-/crHGujo0xnuHIYNc1VgP0HGJGFSoSqq88JFXe6FmFyXPpWt8Xu39LyLg7rchsxfXFeEdA9CrIZvLV5eswXV5g==}
+
+  '@effect/platform@0.70.7':
+    resolution: {integrity: sha512-TbNwj/mOJhycPygbmicGBS7CNtv5Z8WVheRbLUdP3oPAe/nbSOJVLc8ZPvOejhquF/1vJMKuqY5MWfkcBpvi/g==}
+    peerDependencies:
+      effect: ^3.11.5
 
   '@emnapi/runtime@1.1.1':
     resolution: {integrity: sha512-3bfqkzuR1KLx57nZfjr2NLnFOobvyS0aTszaEGCGqmYMVDRaGvgIZbjGSV/MHSSmLgQ/b9JFHQ5xm5WRZYd+XQ==}
@@ -2207,6 +2218,9 @@ packages:
   '@socket.io/component-emitter@3.1.0':
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
 
+  '@standard-schema/spec@1.0.0-beta.3':
+    resolution: {integrity: sha512-0ifF3BjA1E8SY9C+nUew8RefNOIq0cDlYALPty4rhUm8Rrl6tCM8hBT4bhGhx7I7iXD0uAgt50lgo8dD73ACMw==}
+
   '@swc/core-darwin-arm64@1.3.101':
     resolution: {integrity: sha512-mNFK+uHNPRXSnfTOG34zJOeMl2waM4hF4a2NY7dkMXrPqw9CoJn4MwTXJcyMiSz1/BnNjjTCHF3Yhj0jPxmkzQ==}
     engines: {node: '>=10'}
@@ -2494,6 +2508,22 @@ packages:
 
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+
+  '@uploadthing/mime-types@0.3.2':
+    resolution: {integrity: sha512-WP/K75S/649lM0GUcd9jq4RjeTIc/0bO2UmLx4+usTSNy/x0K8gV0JdLWeUUbmTQtJoHd4ZTSvAdG7ZQgcmXvA==}
+
+  '@uploadthing/react@7.1.3':
+    resolution: {integrity: sha512-oV8hhFtAl7I05mmop8zQSz1nIq5KamfSPYpFl0OU/61TcmEcXXISH6CshF/TMuHasvqvGpMVfW7meC8b7idxBA==}
+    peerDependencies:
+      next: '*'
+      react: ^17.0.2 || ^18.0.0
+      uploadthing: 7.4.1
+    peerDependenciesMeta:
+      next:
+        optional: true
+
+  '@uploadthing/shared@7.1.3':
+    resolution: {integrity: sha512-JlYz/JLZPrMAZRg7YPDUICodvIXLW9xS32aErqDvD76juq6nPRwFdwG5V089CY2kS5Ju9I0rGAu94hbJFqd9qQ==}
 
   '@vercel/analytics@1.3.1':
     resolution: {integrity: sha512-xhSlYgAuJ6Q4WQGkzYTLmXwhYl39sWjoMA3nHxfkvG+WdBT25c563a7QhwwKivEOZtPJXifYHR1m2ihoisbWyA==}
@@ -3186,6 +3216,9 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
+  effect@3.11.5:
+    resolution: {integrity: sha512-oSzaR/S/2A/qDTnDqMWxQUNSjCG2sRLB4NEvTu+l9RqE122MTgKXOWzw0x4MHsdovRTzAihfkpgBj2aLFnH2+w==}
+
   electron-to-chromium@1.4.699:
     resolution: {integrity: sha512-I7q3BbQi6e4tJJN5CRcyvxhK0iJb34TV8eJQcgh+fR2fQ8miMgZcEInckCo1U9exDHbfz7DLDnFn8oqH/VcRKw==}
 
@@ -3467,6 +3500,10 @@ packages:
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
 
+  fast-check@3.23.2:
+    resolution: {integrity: sha512-h5+1OzzfCC3Ef7VbtKdcv7zsstUQwUDlYpUTvjeUsJAssPgLn7QzbboPtL5ro04Mq0rPOsMzl7q5hIbRs2wD1A==}
+    engines: {node: '>=8.0.0'}
+
   fast-deep-equal@2.0.1:
     resolution: {integrity: sha512-bCK/2Z4zLidyB4ReuIsvALH6w31YfAQDmXMqMx6FyfHqvBxtjC0eRumeSu4Bs3XtXwpyIywtSTrVT99BxY1f9w==}
 
@@ -3500,9 +3537,16 @@ packages:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
 
+  file-selector@0.6.0:
+    resolution: {integrity: sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==}
+    engines: {node: '>= 12'}
+
   fill-range@7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
     engines: {node: '>=8'}
+
+  find-my-way-ts@0.1.5:
+    resolution: {integrity: sha512-4GOTMrpGQVzsCH2ruUn2vmwzV/02zF4q+ybhCIrw/Rkt3L8KWcycdC6aJMctJzwN4fXD4SD5F/4B9Sksh5rE0A==}
 
   find-up@5.0.0:
     resolution: {integrity: sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng==}
@@ -4425,6 +4469,9 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
+  multipasta@0.2.5:
+    resolution: {integrity: sha512-c8eMDb1WwZcE02WVjHoOmUVk7fnKU/RmUcosHACglrWAuPQsEJv+E8430sXj6jNc1jHw0zrS16aCjQh4BcEb4A==}
+
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
@@ -4871,6 +4918,9 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
+  pure-rand@6.1.0:
+    resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
+
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -5250,6 +5300,9 @@ packages:
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
 
+  sqids@0.3.0:
+    resolution: {integrity: sha512-lOQK1ucVg+W6n3FhRwwSeUijxe93b51Bfz5PMRMihVf1iVkl82ePQG7V5vwrhzB11v0NtsR25PSZRGiSomJaJw==}
+
   stacktrace-parser@0.1.10:
     resolution: {integrity: sha512-KJP1OCML99+8fhOHxwwzyWrlUuVX5GQ0ZpJTd1DFXhdkrvg1szxfHhawXUZ3g9TkXORQd4/WG68jMlQZ2p8wlg==}
     engines: {node: '>=6'}
@@ -5568,6 +5621,27 @@ packages:
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
+
+  uploadthing@7.4.1:
+    resolution: {integrity: sha512-an/ENGUJ06Rg9eI2/bWOUsm+6iDlufDRggUsw6HR4mqhNa/aqLHj5KrWP1CuVHP70fXMCsSM+BgVm00y5wt6wg==}
+    engines: {node: '>=18.13.0'}
+    peerDependencies:
+      express: '*'
+      fastify: '*'
+      h3: '*'
+      next: '*'
+      tailwindcss: '*'
+    peerDependenciesMeta:
+      express:
+        optional: true
+      fastify:
+        optional: true
+      h3:
+        optional: true
+      next:
+        optional: true
+      tailwindcss:
+        optional: true
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
@@ -6167,6 +6241,12 @@ snapshots:
       '@opentelemetry/sdk-trace-base': 1.24.0(@opentelemetry/api@1.8.0)
 
   '@effect-ts/system@0.57.5': {}
+
+  '@effect/platform@0.70.7(effect@3.11.5)':
+    dependencies:
+      effect: 3.11.5
+      find-my-way-ts: 0.1.5
+      multipasta: 0.2.5
 
   '@emnapi/runtime@1.1.1':
     dependencies:
@@ -7979,6 +8059,8 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.0': {}
 
+  '@standard-schema/spec@1.0.0-beta.3': {}
+
   '@swc/core-darwin-arm64@1.3.101':
     optional: true
 
@@ -8269,6 +8351,23 @@ snapshots:
       eslint-visitor-keys: 3.4.3
 
   '@ungap/structured-clone@1.2.0': {}
+
+  '@uploadthing/mime-types@0.3.2': {}
+
+  '@uploadthing/react@7.1.3(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(uploadthing@7.4.1(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.6))':
+    dependencies:
+      '@uploadthing/shared': 7.1.3
+      file-selector: 0.6.0
+      react: 18.3.1
+      uploadthing: 7.4.1(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.6)
+    optionalDependencies:
+      next: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
+  '@uploadthing/shared@7.1.3':
+    dependencies:
+      '@uploadthing/mime-types': 0.3.2
+      effect: 3.11.5
+      sqids: 0.3.0
 
   '@vercel/analytics@1.3.1(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -9005,6 +9104,10 @@ snapshots:
       minimatch: 9.0.1
       semver: 7.6.0
 
+  effect@3.11.5:
+    dependencies:
+      fast-check: 3.23.2
+
   electron-to-chromium@1.4.699: {}
 
   emoji-regex@10.3.0: {}
@@ -9482,6 +9585,10 @@ snapshots:
 
   extend@3.0.2: {}
 
+  fast-check@3.23.2:
+    dependencies:
+      pure-rand: 6.1.0
+
   fast-deep-equal@2.0.1: {}
 
   fast-deep-equal@3.1.3: {}
@@ -9514,9 +9621,15 @@ snapshots:
     dependencies:
       flat-cache: 3.2.0
 
+  file-selector@0.6.0:
+    dependencies:
+      tslib: 2.6.2
+
   fill-range@7.0.1:
     dependencies:
       to-regex-range: 5.0.1
+
+  find-my-way-ts@0.1.5: {}
 
   find-up@5.0.0:
     dependencies:
@@ -10756,6 +10869,8 @@ snapshots:
 
   ms@2.1.3: {}
 
+  multipasta@0.2.5: {}
+
   mz@2.7.0:
     dependencies:
       any-promise: 1.3.0
@@ -11178,6 +11293,8 @@ snapshots:
       long: 5.2.3
 
   punycode@2.3.1: {}
+
+  pure-rand@6.1.0: {}
 
   queue-microtask@1.2.3: {}
 
@@ -11776,6 +11893,8 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
+  sqids@0.3.0: {}
+
   stacktrace-parser@0.1.10:
     dependencies:
       type-fest: 0.7.1
@@ -12154,6 +12273,17 @@ snapshots:
       browserslist: 4.23.0
       escalade: 3.1.1
       picocolors: 1.0.0
+
+  uploadthing@7.4.1(next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.6):
+    dependencies:
+      '@effect/platform': 0.70.7(effect@3.11.5)
+      '@standard-schema/spec': 1.0.0-beta.3
+      '@uploadthing/mime-types': 0.3.2
+      '@uploadthing/shared': 7.1.3
+      effect: 3.11.5
+    optionalDependencies:
+      next: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      tailwindcss: 3.4.6
 
   uri-js@4.4.1:
     dependencies:

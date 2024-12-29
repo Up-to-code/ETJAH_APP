@@ -10,7 +10,7 @@ interface FolderItemProps {
 
 export function FolderItem({ id, name, itemCount }: FolderItemProps) {
   return (
-    <Link href={`/folders/${id}`} className="block transition-transform hover:scale-105">
+    <Link href={`/dashboard/storage/${id}`}>
       <Card>
         <CardContent className="flex items-center space-x-4 p-6">
           <div className="rounded-full bg-primary/10 p-3">

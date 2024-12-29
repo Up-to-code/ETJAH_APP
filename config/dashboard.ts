@@ -21,26 +21,14 @@ export const sidebarLinks: SidebarNavItem[] = [
         authorizeOnly:  [UserRole.EDITOR, UserRole.ADMIN],
       },
       { href: "/dashboard/charts", icon: "lineChart", title: "Charts" },
-      {
-        href: "/admin/orders",
-        icon: "package",
-        title: "Orders",
-        badge: 2,
-        authorizeOnly: UserRole.ADMIN,
-      },
+
       {
         href: "/admin/users",
         icon: "user",
         title: "Manage Users",
          authorizeOnly: UserRole.ADMIN,
       },
-      {
-        href: "#/dashboard/posts",
-        icon: "post",
-        title: "User Posts",
-        authorizeOnly: UserRole.USER,
-        disabled: true,
-      },
+
   
     ],
   },

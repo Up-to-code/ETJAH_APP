@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,22 +10,34 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Folder } from 'lucide-react'
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Folder } from "lucide-react";
+import CreateFolder from "@/actions/storage/CreateFolder";
+import { toast } from "sonner";
 
 export function CreateFolderButton() {
-  const [folderName, setFolderName] = useState('')
-  const [isOpen, setIsOpen] = useState(false)
+  const [folderName, setFolderName] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Here you would typically send the new folder data to your backend
-    console.log('Creating folder:', folderName)
-    setFolderName('')
-    setIsOpen(false)
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!folderName) return;
+    try {
+      const response = await CreateFolder(folderName);
+      if (response.name !== folderName) return;
+      toast.success("Folder created successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+    setFolderName("");
+    setIsOpen(false);
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -62,6 +74,5 @@ export function CreateFolderButton() {
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-
