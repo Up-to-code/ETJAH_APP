@@ -8,7 +8,7 @@ export default async function Etjah() {
     <section className="space-y-6 py-12 sm:py-20 lg:py-24">
       <div className="container flex max-w-screen-md flex-col items-center gap-5 text-center">
         
-        {/* External Link for Company Starter */}
+        {/* External Link to start your company */}
         <Link
           href="https://next-saas-stripe-starter.vercel.app/"
           className={cn(
@@ -17,12 +17,12 @@ export default async function Etjah() {
           )}
           target="_blank"
         >
-          <span className="mr-3">🎉</span> Everything you need to launch your company
+          <span className="mr-3">🎉</span> All you need to start your company
         </Link>
 
         {/* Main Heading */}
-        <h1 className="text-balance font-satoshi text-[40px] font-extrabold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl md:leading-[1.15]">
-          The all-in-one solution{" "}
+        <h1 className="text-balance font-satoshi text-[40px] font-black leading-[1.15] tracking-tight sm:text-5xl md:text-6xl md:leading-[1.15]">
+          All in one app{" "}
           <span className="bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
             Start Now!
           </span>
@@ -30,7 +30,7 @@ export default async function Etjah() {
 
         {/* Optional Description */}
         <p className="max-w-2xl text-balance text-muted-foreground sm:text-lg">
-          {/* You can add key features, highlights, or benefits here */}
+          {/* You can add a description or benefits here */}
         </p>
 
         {/* CTA Button to Dashboard */}
@@ -43,7 +43,7 @@ export default async function Etjah() {
               "gap-2 px-5 text-[15px]"
             )}
           >
-            <span>Access Your Dashboard</span>
+            <span>Go to Dashboard</span>
             <Icons.arrowRight className="size-4" />
           </Link>
         </div>
