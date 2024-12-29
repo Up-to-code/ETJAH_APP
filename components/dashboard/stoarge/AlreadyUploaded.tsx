@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { getFolderFiles } from "@/actions/storage/get-folder-files.ts";
 import DeleteButton from "./delete-button";
+import Link from "next/link";
 
 interface GetFolderFilesResponse {
   success: boolean;
@@ -176,6 +177,9 @@ const AlreadyUploaded = ({ folderId }: AlreadyUploadedProps) => {
                     fileName={file.name}
                     fileType={file.type}
                   /> */}
+         <Link href={file.url as string} target="_blank" className="text-blue-500 hover:underline">
+          Show
+         </Link>
                   <DeleteButton fileId={file.id} onDelete={handleDelete} />
                 </div>
               </CardContent>
