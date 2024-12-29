@@ -94,8 +94,8 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                   <span className="sr-only">Toggle Sidebar</span>
                 </Button>
               </div> */}
-               <p className="text-center font-bold text-xl mt-8">
-                <span className="text-center font-bold text-xl">
+               <p className="mt-8 text-center text-xl font-bold">
+                <span className="text-center text-xl font-bold">
                    ETJAH 
                 </span>
                </p>
