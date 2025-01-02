@@ -10,6 +10,7 @@ import {
 import { ModeToggle } from "@/components/layout/mode-toggle";
 import { UserAccountNav } from "@/components/layout/user-account-nav";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
+import EnhancedAccessDenied from "@/components/layout/enhanced-access-denied";
 
 interface ProtectedLayoutProps {
   children: React.ReactNode;
@@ -30,7 +31,9 @@ export default async function Dashboard({ children }: ProtectedLayoutProps) {
       return authorizeOnly === user.role;
     }),
   }));
-
+  if (user.role === "USER") {
+    return <EnhancedAccessDenied />;
+  }
   return (
     <div className="relative flex min-h-screen w-full">
       <DashboardSidebar links={filteredLinks} />

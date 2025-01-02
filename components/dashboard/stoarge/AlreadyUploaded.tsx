@@ -20,6 +20,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { getFolderFiles } from "@/actions/storage/get-folder-files.ts";
 import DeleteButton from "./delete-button";
 import Link from "next/link";
+import { deleteFile as deleteFile_bay_kay } from "@/actions/storage/delete_file";
 
 interface GetFolderFilesResponse {
   success: boolean;
@@ -40,9 +41,7 @@ const AlreadyUploaded = ({ folderId }: AlreadyUploadedProps) => {
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const result = (await getFolderFiles(
-          folderId
-        )) as GetFolderFilesResponse;
+        const result = (await getFolderFiles(folderId)) as GetFolderFilesResponse;
         if (result.success && result.files) {
           setFiles(result.files);
         } else {
@@ -57,8 +56,25 @@ const AlreadyUploaded = ({ folderId }: AlreadyUploadedProps) => {
     fetchFiles();
   }, [folderId]);
 
-  const handleDelete = (fileId: string) => {
-    setFiles((prevFiles) => prevFiles.filter((file) => file.id !== fileId));
+  const handleDelete = async (fileKey: string) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const result = await deleteFile_bay_kay({
+        KAY: fileKey,
+        file_db_id: files.find((file) => file.key === fileKey)?.id || "",
+      });
+      if (result.success) {
+        setFiles((prevFiles) => prevFiles.filter((file) => file.key !== fileKey));
+      } else {
+        setError("Failed to delete the file");
+      }
+    } catch (err) {
+      setError("An unexpected error occurred");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const formatBytes = (bytes: number) => {
@@ -71,12 +87,9 @@ const AlreadyUploaded = ({ folderId }: AlreadyUploadedProps) => {
 
   const getFileIcon = (fileType: string) => {
     if (fileType.startsWith("image/")) return <ImageIcon className="size-5" />;
-    if (fileType.startsWith("audio/"))
-      return <FileAudioIcon className="size-5" />;
-    if (fileType.startsWith("video/"))
-      return <FileVideoIcon className="size-5" />;
-    if (fileType.startsWith("text/"))
-      return <FileTextIcon className="size-5" />;
+    if (fileType.startsWith("audio/")) return <FileAudioIcon className="size-5" />;
+    if (fileType.startsWith("video/")) return <FileVideoIcon className="size-5" />;
+    if (fileType.startsWith("text/")) return <FileTextIcon className="size-5" />;
     return <FileIcon className="size-5" />;
   };
 
@@ -84,9 +97,7 @@ const AlreadyUploaded = ({ folderId }: AlreadyUploadedProps) => {
     return (
       <div className="flex items-center justify-center p-6">
         <Loader2 className="size-6 animate-spin text-primary" />
-        <span className="ml-2 text-sm text-muted-foreground">
-          Loading files...
-        </span>
+        <span className="ml-2 text-sm text-muted-foreground">Loading files...</span>
       </div>
     );
   }
@@ -128,13 +139,7 @@ const AlreadyUploaded = ({ folderId }: AlreadyUploadedProps) => {
         </ToggleGroup>
       </div>
       <ScrollArea className="h-[400px] pr-4">
-        <div
-          className={
-            viewMode === "grid"
-              ? "grid grid-cols-2 gap-4 md:grid-cols-3"
-              : "space-y-4"
-          }
-        >
+        <div className={viewMode === "grid" ? "grid grid-cols-2 gap-4 md:grid-cols-3" : "space-y-4"}>
           {files.map((file) => (
             <Card key={file.id} className="transition-all hover:shadow-md">
               <CardContent
@@ -150,9 +155,7 @@ const AlreadyUploaded = ({ folderId }: AlreadyUploadedProps) => {
                   <div className="rounded-lg bg-secondary p-2">
                     {getFileIcon(file.type)}
                   </div>
-                  <div
-                    className={viewMode === "grid" ? "mt-2 text-center" : ""}
-                  >
+                  <div className={viewMode === "grid" ? "mt-2 text-center" : ""}>
                     <p className="font-medium">{file.name}</p>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Badge variant="secondary" className="rounded-sm">
@@ -172,15 +175,15 @@ const AlreadyUploaded = ({ folderId }: AlreadyUploadedProps) => {
                     viewMode === "grid" ? "mt-4 justify-center" : ""
                   } gap-2`}
                 >
-                  {/* <DownloadButton
-                    fileUrl={file.url}
-                    fileName={file.name}
-                    fileType={file.type}
-                  /> */}
-         <Link href={file.url as string} target="_blank" className="text-blue-500 hover:underline">
-          Show
-         </Link>
-                  <DeleteButton fileId={file.id} onDelete={handleDelete} />
+                  <Link
+                    href={file.url as string}
+                    target="_blank"
+                    className="text-blue-500 hover:underline"
+                    aria-label="Show file"
+                  >
+                    Show
+                  </Link>
+                  <DeleteButton fileId={file.id} fileKey={file.key} onDelete={handleDelete} />
                 </div>
               </CardContent>
             </Card>
