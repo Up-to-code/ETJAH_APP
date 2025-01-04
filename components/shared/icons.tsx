@@ -31,8 +31,9 @@ import {
   User,
   X,
   Folder,
+  Table2
 } from "lucide-react";
-
+ 
 export type Icon = LucideIcon;
 
 export const Icons = {
@@ -98,6 +99,7 @@ export const Icons = {
   spinner: Loader2,
   sun: SunMedium,
   trash: Trash2,
+  table: Table2,
   twitter: ({ ...props }: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

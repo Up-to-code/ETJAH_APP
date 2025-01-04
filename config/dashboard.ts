@@ -12,6 +12,12 @@ export const sidebarLinks: SidebarNavItem[] = [
         title: "Admin Panel",
         authorizeOnly: UserRole.ADMIN,
       },
+      {
+        href: "/dashboard/CRM",
+        icon: "table",
+        title: "CRM",
+        authorizeOnly: UserRole.ADMIN,
+      },
  
       { href: "/dashboard", icon: "dashboard", title: "Dashboard" },
       {
@@ -21,7 +27,7 @@ export const sidebarLinks: SidebarNavItem[] = [
         authorizeOnly:  [UserRole.EDITOR, UserRole.ADMIN],
       },
       { href: "/dashboard/charts", icon: "lineChart", title: "Charts" },
-
+ 
       {
         href: "/admin/users",
         icon: "user",
