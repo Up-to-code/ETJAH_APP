@@ -10,7 +10,7 @@ export default async function Etjah() {
         
         {/* External Link for Company Starter */}
         <Link
-          href="https://next-saas-stripe-starter.vercel.app/"
+          href="https://github.com/Up-to-code"
           className={cn(
             buttonVariants({ variant: "outline", size: "sm", rounded: "xl" }),
             "px-4"

@@ -135,7 +135,7 @@ pnpm run remove-content --docs
 
 ## Author
 
-This project is based on [Next SaaS Stripe Starter](https://next-saas-stripe-starter.vercel.app/).
+This project is based on [Next SaaS Stripe Starter](https://github.com/Up-to-code).
 
 Created by [@miickasmt](https://twitter.com/miickasmt) in 2023, released under the [MIT license](https://github.com/shadcn/taxonomy/blob/main/LICENSE.md).
 
