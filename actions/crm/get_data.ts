@@ -1,17 +1,43 @@
-"use server"; // Mark this function as a Server Action
+"use server";
 
 import { prisma } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 
-export async function getCustomers(page: number) {
+export async function getCustomers(
+  page: number,
+  searchTerm?: string,
+  typeFilter?: string
+) {
   try {
-    const data = await prisma.cRM_Customer.findMany({
-      skip: +(page || 0) * 10,
-      take: 10,
-    });
+    let whereClause: Prisma.CRM_CustomerWhereInput = {};
 
-    return data; // Return the data directly (no need for NextResponse)
+    if (searchTerm) {
+      whereClause.OR = [
+        { name: { contains: searchTerm, mode: "insensitive" } },
+        { phone: { contains: searchTerm, mode: "insensitive" } },
+        { note: { contains: searchTerm, mode: "insensitive" } },
+        { com_from: { contains: searchTerm, mode: "insensitive" } },
+      ];
+    }
+
+    if (typeFilter) {
+      whereClause.type = { contains: typeFilter, mode: "insensitive" };
+    }
+
+    const [data, total] = await Promise.all([
+      prisma.cRM_Customer.findMany({
+        where: whereClause,
+        skip: page * 10,
+        take: 10,
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.cRM_Customer.count({ where: whereClause }),
+    ]);
+
+    return { data, total };
   } catch (error) {
     console.error("Error fetching customers:", error);
     throw new Error("Failed to fetch customers");
   }
 }
+

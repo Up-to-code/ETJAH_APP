@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from 'react';
-import { MoreHorizontal, Pencil, Trash } from 'lucide-react';
+import { MoreHorizontal, Eye, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -11,21 +13,19 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { DeleteCustomerDialog } from './delete-customer-dialog';
-import { Customer } from '@/types/types';
+import { CustomerDetailView } from './customer-detail-view';
+import { CRM_Customer } from '@prisma/client';
 import { formatDateTime } from '@/lib/dateTime';
 
-// ... (keep the existing Customer interface)
-
 interface CustomerRowProps {
-  customer: Customer;
-  filteredCustomers: Customer[];
-  onDeleteCustomer: (id: string) => void; // Add this prop
+  customer: CRM_Customer;
+  onDeleteCustomer: (id: string) => void;
+  onCustomerUpdated: (updatedCustomer: CRM_Customer) => void;
 }
 
-export default function CustomerRow({ customer, filteredCustomers, onDeleteCustomer }: CustomerRowProps) {
+export default function CustomerRow({ customer, onDeleteCustomer, onCustomerUpdated }: CustomerRowProps) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-
-  // ... (keep the existing formatDateTime function)
+  const [isDetailViewOpen, setIsDetailViewOpen] = useState(false);
 
   const handleDeleteClick = () => {
     setIsDeleteDialogOpen(true);
@@ -36,9 +36,9 @@ export default function CustomerRow({ customer, filteredCustomers, onDeleteCusto
     setIsDeleteDialogOpen(false);
   };
 
-  if (filteredCustomers.length === 0) {
-    // ... (keep the existing empty state rendering)
-  }
+  const handleViewClick = () => {
+    setIsDetailViewOpen(true);
+  };
 
   return (
     <>
@@ -57,9 +57,9 @@ export default function CustomerRow({ customer, filteredCustomers, onDeleteCusto
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem>
-                <Pencil className="mr-2 size-4" />
-                Edit
+              <DropdownMenuItem onClick={handleViewClick}>
+                <Eye className="mr-2 size-4" />
+                View
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleDeleteClick}>
@@ -76,6 +76,13 @@ export default function CustomerRow({ customer, filteredCustomers, onDeleteCusto
         onConfirm={handleDeleteConfirm}
         customerName={customer.name}
       />
+      {isDetailViewOpen && (
+        <CustomerDetailView
+          customer={customer}
+          onClose={() => setIsDetailViewOpen(false)}
+          onCustomerUpdated={onCustomerUpdated}
+        />
+      )}
     </>
   );
 }

@@ -1,8 +1,7 @@
-// app/dashboard/CRM/page.tsx
 "use client";
 
-import { useState, useEffect } from "react";
-import { PlusCircle } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { PlusCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,61 +13,72 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import CustomerRow from "@/components/CRM/customer-row";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import Link from "next/link";
 import { getCustomers } from "@/actions/crm/get_data";
 import { Customer } from "@/types/types";
 import { deleteCustomer } from "@/actions/crm/delate_c";
 import { toast } from "sonner";
+import debounce from "lodash/debounce";
 
 export default function CRMPage() {
   const [typeFilter, setTypeFilter] = useState<string | undefined>(undefined);
-  const [customers, setCustomers] = useState<Customer[]>([]); // State to store fetched customers
-  const [loading, setLoading] = useState(true); // State to handle loading state
-  const [page, setPage] = useState(0); // State to handle pagination
+  const [searchTerm, setSearchTerm] = useState("");
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0);
+  const [totalCustomers, setTotalCustomers] = useState(0);
 
-  // Fetch customers from the Server Action
+  const fetchCustomers = useCallback(async () => {
+    try {
+      setLoading(true);
+      const { data, total } = await getCustomers(page, searchTerm, typeFilter);
+      setCustomers(data);
+      setTotalCustomers(total);
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+      toast.error("Failed to fetch customers");
+    } finally {
+      setLoading(false);
+    }
+  }, [page, searchTerm, typeFilter]);
+
   useEffect(() => {
-    const fetchCustomers = async () => {
-      try {
-        setLoading(true);
-        const data = await getCustomers(page); // Call the Server Action
-        setCustomers(data);
-      } catch (error) {
-        console.error("Error fetching customers:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchCustomers();
-  }, [page]); // Re-fetch when the page changes
+  }, [fetchCustomers]);
 
-  // Filter customers based on type
-  const filteredCustomers = typeFilter
-    ? customers.filter((customer) => customer.type === typeFilter)
-    : customers;
+  const debouncedSearch = debounce((value: string) => {
+    setSearchTerm(value);
+    setPage(0);
+  }, 300);
 
-  // Handle customer deletion
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearch(e.target.value);
+  };
+
+  const handleTypeFilterChange = (value: string) => {
+    setTypeFilter(value.trim() === "" ? undefined : value);
+    setPage(0);
+  };
+
   const handleDeleteCustomer = async (id: string) => {
-    setCustomers((prev) => prev.filter((customer) => customer.id !== id));
     try {
       await deleteCustomer(id);
       toast.success("Customer Deleted", {
         description: "The customer has been successfully deleted.",
       });
+      fetchCustomers();
     } catch (error) {
       toast.error("Error Deleting Customer", {
         description:
           "There was an error deleting the customer. Please try again.",
       });
     }
+  };
+
+  const handleEditCustomer = (updatedCustomer: Customer) => {
+    setCustomers((prev) =>
+      prev.map((c) => (c.id === updatedCustomer.id ? updatedCustomer : c))
+    );
   };
 
   return (
@@ -82,21 +92,16 @@ export default function CRMPage() {
             <Input
               type="search"
               placeholder="Search customers..."
+              onChange={handleSearchChange}
               className="max-w-sm"
             />
           </div>
-          <Select onValueChange={setTypeFilter}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Filter by type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Seller">Seller</SelectItem>
-              <SelectItem value="Bayer">Bayer</SelectItem>
-              <SelectItem value="Developer">Developer</SelectItem>
-              <SelectItem value="Asker">Asker</SelectItem>
-              <SelectItem value="Other">Other</SelectItem>
-            </SelectContent>
-          </Select>
+          <Input
+            type="text"
+            placeholder="Filter by type..."
+            onChange={(e) => handleTypeFilterChange(e.target.value)}
+            className="w-[180px]"
+          />
         </div>
         <Link href="/dashboard/CRM/create_c">
           <Button>
@@ -122,13 +127,13 @@ export default function CRMPage() {
                   Loading...
                 </TableCell>
               </TableRow>
-            ) : filteredCustomers.length > 0 ? (
-              filteredCustomers.map((customer) => (
+            ) : customers.length > 0 ? (
+              customers.map((customer) => (
                 <CustomerRow
                   key={customer.id}
                   customer={customer}
-                  filteredCustomers={filteredCustomers}
                   onDeleteCustomer={handleDeleteCustomer}
+                  onCustomerUpdated={handleEditCustomer}
                 />
               ))
             ) : (
@@ -141,20 +146,29 @@ export default function CRMPage() {
           </TableBody>
         </Table>
       </div>
-      <div className="mt-6 flex justify-between">
-        <Button
-          variant="outline"
-          disabled={page === 0}
-          onClick={() => setPage((prev) => prev - 1)}
-        >
-          Previous
-        </Button>
-        {customers.length > 0 && (
-          <Button variant="outline" onClick={() => setPage((prev) => prev + 1)}>
+      <div className="mt-6 flex items-center justify-between">
+        <div>
+          Showing {page * 10 + 1}-{Math.min((page + 1) * 10, totalCustomers)} of{" "}
+          {totalCustomers} customers
+        </div>
+        <div className="space-x-2">
+          <Button
+            variant="outline"
+            disabled={page === 0}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            disabled={(page + 1) * 10 >= totalCustomers}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
             Next
           </Button>
-        )}
+        </div>
       </div>
     </div>
   );
 }
+
